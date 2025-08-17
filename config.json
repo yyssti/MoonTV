@@ -315,14 +315,15 @@
             "name": "AV-乐播资源",
             "api": "https://lbapi9.com/api.php/provide/vod",
             "detail": ""
-    "mdzy": {
-      "api": "https://www.mdzyapi.com/api.php/provide/vod",
-      "name": "魔都资源"
-    },
-    "jisu": {
-      "api": "https://jszyapi.com/api.php/provide/vod",
-      "name": "极速资源",
-      "detail": "https://jszyapi.com"
+       },
+        "mdzy": {
+          "name": "魔都资源"
+          "api": "https://www.mdzyapi.com/api.php/provide/vod",
+        },
+         "jisu": {
+           "name": "极速资源",
+           "api": "https://jszyapi.com/api.php/provide/vod",
+           "detail": "https://jszyapi.com"
         }
     }
 }
