@@ -46,16 +46,6 @@
             "api": "https://hhzyapi.com/api.php/provide/vod",
             "detail": "https://hhzyapi.com"
         },
-        "8_Thme": {
-            "name": "TV-黑木耳1",
-            "api": "https://json.heimuer.xyz/api.php/provide/vod",
-            "detail": "https://json.heimuer.xyz"
-        },
-        "74_hmedb": {
-            "name": "TV-黑木耳2",
-            "api": "https://json02.heimuer.xyz/api.php/provide/vod",
-            "detail": "https://json02.heimuer.xyz"
-        },
         "9_Thnzy": {
             "name": "TV-红牛资源",
             "api": "https://www.hongniuzy2.com/api.php/provide/vod",
@@ -125,11 +115,6 @@
             "name": "TV-旺旺短剧",
             "api": "https://wwzy.tv/api.php/provide/vod",
             "detail": "https://wwzy.tv"
-        },
-        "21_Twlzy": {
-            "name": "TV-卧龙资源1",
-            "api": "https://collect.wolongzy.cc/api.php/provide/vod",
-            "detail": "https://collect.wolongzy.cc"
         },
         "44_wlzy": {
             "name": "TV-卧龙资源2",
