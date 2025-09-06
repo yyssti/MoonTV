@@ -1,56 +1,49 @@
 /** @type {import('next').NextConfig} */
 /* eslint-disable @typescript-eslint/no-var-requires */
+
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  disable: process.env.NODE_ENV === 'development',
+  register: true,
+  skipWaiting: true,
+});
+
 const nextConfig = {
   output: 'standalone',
   eslint: {
     dirs: ['src'],
   },
 
-  reactStrictMode: false,
+  reactStrictMode: true, // 开启严格模式
   swcMinify: true,
 
-  // Uncoment to add domain whitelist
   images: {
-    unoptimized: true,
+    formats: ['image/avif', 'image/webp'], // 自动生成现代格式
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-      {
-        protocol: 'http',
-        hostname: '**',
-      },
+      { protocol: 'https', hostname: '**' },
+      { protocol: 'http', hostname: '**' },
     ],
+    // ❌ 不要加 unoptimized: true，否则自动生成 blurDataURL 和优化会失效
   },
 
   webpack(config) {
-    // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
       rule.test?.test?.('.svg')
     );
 
     config.module.rules.push(
-      // Reapply the existing rule, but only for svg imports ending in ?url
-      {
-        ...fileLoaderRule,
-        test: /\.svg$/i,
-        resourceQuery: /url/, // *.svg?url
-      },
-      // Convert all other *.svg imports to React components
+      // *.svg?url 保持原文件输出
+      { ...fileLoaderRule, test: /\.svg$/i, resourceQuery: /url/ },
+      // 其余 svg 转 React Component
       {
         test: /\.svg$/i,
         issuer: { not: /\.(css|scss|sass)$/ },
-        resourceQuery: { not: /url/ }, // exclude if *.svg?url
+        resourceQuery: { not: /url/ },
         loader: '@svgr/webpack',
-        options: {
-          dimensions: false,
-          titleProp: true,
-        },
+        options: { dimensions: false, titleProp: true },
       }
     );
 
-    // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;
 
     config.resolve.fallback = {
@@ -63,12 +56,5 @@ const nextConfig = {
     return config;
   },
 };
-
-const withPWA = require('next-pwa')({
-  dest: 'public',
-  disable: process.env.NODE_ENV === 'development',
-  register: true,
-  skipWaiting: true,
-});
 
 module.exports = withPWA(nextConfig);
